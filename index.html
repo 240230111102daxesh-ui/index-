@@ -221,8 +221,6 @@
             100% { transform: translate(var(--cx), 110vh) rotate(var(--cr)); opacity: 0; }
         }
 
-       
-
         /* ===== SCROLL WORLD ===== */
         #scrollWorld {
             display: none; position: fixed;
@@ -297,8 +295,10 @@
         .polaroid-caption { font-family: 'Lato', sans-serif; font-weight: 300; font-size: 0.78rem; color: #aaa; text-align: center; margin-top: 8px; letter-spacing: 0.06em; }
 
         .scroll-more-hint { text-align: center; margin-top: 44px; opacity: 0; animation: hintFadeIn 1s 1.8s ease-out forwards; }
+        @keyframes hintFadeIn { to { opacity: 1; } }
         .scroll-more-hint span { font-family: 'Playfair Display', serif; font-style: italic; color: #ff85a1; font-size: 1rem; }
         .scroll-more-hint .arrow2 { display: block; font-size: 1.4rem; animation: arrowBounce 1.2s infinite ease-in-out; margin-top: 4px; }
+        @keyframes arrowBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(9px); } }
 
         /* ── ALBUM ── */
         .album-title-wrap {
@@ -490,11 +490,6 @@
 <div class="btn-container">
     <button id="yesBtn" onclick="handleYes()">Yes</button>
     <button id="noBtn" onclick="handleNo()">No</button>
-</div>
-
-<!-- SCROLL HINT -->
-<div id="scrollHint">
-    <span class="arrow-bounce">↓</span>
 </div>
 
 <!-- SCROLL WORLD -->
@@ -727,8 +722,9 @@
             launchConfetti(35);
         }, 4000);
 
+        // Automatically open scroll world after celebration
         setTimeout(() => {
-            document.getElementById('scrollHint').style.display = 'block';
+            openScrollWorld();
         }, 3500);
     }
 
@@ -745,23 +741,10 @@
     }
     setInterval(createHeart, 150);
 
-    document.getElementById('scrollHint').addEventListener('click', openScrollWorld);
-
-    let touchY = 0;
-    document.addEventListener('touchstart', (e) => { touchY = e.touches[0].clientY; }, {passive:true});
-    document.addEventListener('touchend', (e) => {
-        if (document.getElementById('scrollHint').style.display === 'block') {
-            if (touchY - e.changedTouches[0].clientY > 30) openScrollWorld();
-        }
-    }, {passive:true});
-    document.addEventListener('wheel', (e) => {
-        if (document.getElementById('scrollHint').style.display === 'block' && e.deltaY > 0) openScrollWorld();
-    });
-
     function openScrollWorld() {
         const sw = document.getElementById('scrollWorld');
         if (sw.style.display === 'block') return;
-        document.getElementById('scrollHint').style.display = 'none';
+        
         ['finalImageContainer','ribbon','yesMessage'].forEach(id => {
             document.getElementById(id).style.zIndex = '0';
         });
@@ -811,12 +794,4 @@
     }
 </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
