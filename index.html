@@ -221,27 +221,7 @@
             100% { transform: translate(var(--cx), 110vh) rotate(var(--cr)); opacity: 0; }
         }
 
-        /* ===== SCROLL HINT ===== */
-        <div> scroll kar </div>
-        #scrollHint {
-            display: none; position: fixed;
-            bottom: 28px; left: 50%;
-            transform: translateX(-50%);
-            z-index: 10020; text-align: center;
-            opacity: 0; cursor: pointer;
-            animation: hintFadeIn 1s 3.5s ease-out forwards;
-        }
-        @keyframes hintFadeIn { to { opacity: 1; } }
-        #scrollHint .hint-text {
-            font-family: 'Playfair Display', serif;
-            font-style: italic; font-size: 1.2rem;
-            color: #ff4d6d; margin-bottom: 6px;
-            background: rgba(255,255,255,0.75);
-            padding: 7px 20px; border-radius: 30px;
-            backdrop-filter: blur(6px);
-        }
-        #scrollHint .arrow-bounce { font-size: 1.8rem; animation: arrowBounce 1.2s infinite ease-in-out; display: block; }
-        @keyframes arrowBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(9px); } }
+       
 
         /* ===== SCROLL WORLD ===== */
         #scrollWorld {
@@ -834,6 +814,7 @@
 </body>
 
 </html>
+
 
 
 
